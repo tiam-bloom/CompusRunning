@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="section/head :: import">
+    <meta charset="UTF-8">
+    <title>我的发布</title>
+</head>
+<body>
+<div th:replace="section/head :: head"></div>
+<!-- 编辑Modal -->
+<div class="modal fade" id="upDemand" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">编辑内容</h4>
+            </div>
+            <form action="/upDemand" method="post" class="messages">
+                <div class="modal-body">
+                    <div class="messlist" style="display: none">
+                        <label>订单编号</label>
+                        <input type="text" id="did" name="did" readonly/>
+                        <div class="clears"></div>
+                    </div>
+                    <div class="messlist">
+                        <label>标题</label>
+                        <input type="text" id="title" name="title" placeholder="请输入标题" maxlength="15"/>
+                        <div class="clears"></div>
+                    </div>
+                    <div class="messlist textareas">
+                        <label>内容</label>
+                        <textarea placeholder="请输入内容(上限800字)" id="content1" name="content" maxlength="800"></textarea>
+                        <div class="clears"></div>
+                    </div>
+                    <div class="messlist">
+                        <label>金额</label>
+                        <input type="text" name="reward" id="reward" placeholder="请输入金额" maxlength="5"
+                               onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"/>
+                        <div class="clears"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">确定修改</button>
+                    <button type="reset" class="btn btn-danger">重置</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container" id="container">
+    <font color="red" th:text="${err_msg}"></font>
+    <font color="green" th:text="${success_msg}"></font>
+    <div class="media" th:each="d:${DEMANDS}">
+        <div class="media-left media-top">
+            <img th:src="@{${d.userInfo.bigHead}}" onerror="this.src='https://static.runoob.com/images/mix/img_avatar.png'" class="media-object"
+                 style="width:80px">
+        </div>
+        <div class="media-body">
+            <h5 class="media-heading" th:text="${d.name}"></h5>
+            <h4 align="center" th:text="${d.title}"></h4>
+            <p id="content" th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${d.content}"></p>
+        </div>
+        <div>
+            <div class="btn-group btn-group-lg pull-right" role="group" aria-label="...">
+                <span class="btn btn-default" th:text="'金额:'+${d.reward}+'元'"></span>
+                <button type="button" th:onclick="'javascript:DisplayDemand('+${d.did}+');'" class="btn btn-info" data-toggle="modal"
+                        data-target="#upDemand">编辑
+                </button>
+                <button type="button" th:onclick="'javascript:delDemand('+${d.did}+');'" class="btn btn-danger">删除</button>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+</div>
+<script>
+    function delDemand(did) {
+        location.href = "/delDemand.action?did=" + did
+    }
+
+    function DisplayDemand(did) {
+        $.ajax({
+            url: "/findDemandByDid?did=" + did,
+            success: function (data) {
+                $("#did").val(data.did);
+                $("#title").val(data.title);
+                $("#content1").val(data.content);
+                $("#reward").val(data.reward);
+            }
+        })
+    }
+</script>
+</body>
+</html>

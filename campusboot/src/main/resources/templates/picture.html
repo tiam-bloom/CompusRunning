@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>图片上传</title>
+    <link rel="stylesheet" th:href="@{/css/demo.css}" media="all">
+</head>
+<body>
+<!--Tz_box start-->
+<div id="Tz_box">
+    <input type="file" id="input" size="10" style="visibility:hidden;">
+    <canvas id="Tz_wrap"></canvas>
+    <p class="ptit">请拖拽图片至此区域</p>
+    <!--btnbox start-->
+    <div class="btnbox">
+        <div id="rotateLeftBtn">↶<span>左旋转</span></div>
+        <div id="rotateRightBtn">↷<span>左旋转</span></div>
+        <div id="upload">⇧<span>上传图片</span></div>
+        <div id="send">➥<span>确认发送</span></div>
+    </div>
+    <!--btnbox end-->
+    <!--showbox start-->
+    <div class="showbox">
+        <canvas id="preview180" class="preview"></canvas>
+        <span class="tit">图片预览:180*180</span>
+        <div class="prev"><img src="" alt="" id="imgg"></div>
+        <span class="tit"><a href="/home.action" >跳转</a></span>
+    </div>
+    <!--show box end-->
+</div>
+
+<script th:src="@{/js/jquery-1.11.1.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/imagecropper.js}" type="text/javascript"></script>
+<script th:src="@{/js/demo.js}" type="text/javascript"></script>
+</body>
+</html>

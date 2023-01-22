@@ -1,0 +1,28 @@
+/*通用初始化样式*/
+* { margin: 0; padding: 0; }
+body, div, p, h1, h2, h3, h4, h5, h6, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, table,th,td { margin:0; padding:0; }
+body, button, input, select, textarea  { font: 12px/24px Arial, 'Microsoft Yahei',"宋体", sans-serif; }
+address, cite, em, i { font-style: normal; }
+small { font-size: 12px; } li { list-style: none; } a { text-decoration: none; } a:hover { text-decoration: none; }
+legend { color: #000; } fieldset, img { border: 0; } button, input, select, textarea { font-size: 100%; line-height:normal; }
+table{ border-collapse: collapse; border-spacing: 0; }
+input[type="button"],input[type="submit"],input[type="reset"]{cursor:pointer;}
+iframe{ display:block; } .clearfix:after { visibility:hidden; display:block; font-size:0; content:" "; clear:both; height:0; } .clearfix { zoom:1; }
+/*正文样式*/
+* { margin: 0; padding: 0; }
+body { background: rgba(0, 0, 0, 0.09); -webkit-user-select: none; }
+#Tz_box { width: 880px; height: 600px; margin: 10px auto; box-shadow: 0 0 7px #565656; position: relative; background-color: #f1f1f1; }
+#Tz_wrap { float: left; width: 500px; height: 500px; margin: 35px; border: 3px dashed silver; position: relative; padding: 5px; }
+.ptit { position: absolute; display: block; font-size: 36px; text-align: center; color: rgba(211, 153, 151, 0.79); z-index: 1; top: 250px; left: 120px; }
+.showbox { float: left; width: 280px; height: 500px; margin: 35px 0; position: relative; }
+.preview { position: absolute; border: 3px dashed silver; top: 20px; left: 10px; width: 180px; height: 180px; }
+.tit { position: absolute; display: block; font-size: 14px; text-align: center; color: rgba(211, 153, 151, 1); top: 250px; left: 120px; }
+.tit:nth-of-type(1) { top: 210px; left: 50px; }
+.prev { position: absolute; border: 3px dashed silver; top: 250px; left: 10px; width: 180px; height: 180px; }
+.tit:nth-of-type(2) { top: 435px; left: 15px; }
+.btnbox { position: absolute; width: 500px; height: 50px; border-radius: 10px; top: 490px; left: 40px; }
+.btnbox div { float: left; margin-left: 60px; width: 50px; height: 50px; text-align: center; line-height: 50px; font-size: 30px; color: #ffffff; font-weight: bold; background-color: rgba(211, 153, 151, 1); border-radius: 100%; cursor: pointer }
+.btnbox div span { display: none; font-size: 12px }
+.btnbox div:hover { background-color: #f1f1f1; color: rgba(211, 153, 151, 1) }
+.btnbox div:hover span { display: block; }
+

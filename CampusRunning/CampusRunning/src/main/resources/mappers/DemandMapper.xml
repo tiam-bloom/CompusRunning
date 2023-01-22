@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fit.yujing.mapper.DemandMapper">
+    <!--查询倒序展示所有未被承接的订单-->
+    <select id="findAll" resultType="Demand">
+        SELECT * FROM demand where state is null ORDER BY did DESC
+    </select>
+    <!--根据标题查询订单-->
+    <select id="findDemandByTitle" resultType="Demand" parameterType="String">
+        SELECT * FROM demand where title like concat('%',#{title},'%')
+    </select>
+    <!--根据发布人id查询订单-->
+    <select id="findDemandById" resultType="Demand" parameterType="Integer">
+        select * from demand where id = #{id};
+    </select>
+    <!--查询我承担的订单-->
+    <select id="findDemandByItd" resultType="Demand" parameterType="Integer">
+        select * from demand where ltd = #{id};
+    </select>
+    <!--更新订单发布人昵称-->
+    <update id="upName" parameterType="Demand">
+        UPDATE demand SET NAME = #{name} WHERE id = #{id}
+    </update>
+    <!--更新订单状态及承接人(接单)-->
+    <insert id="addStateAndLtd" parameterType="Demand">
+        UPDATE demand SET state = 1,ltd = #{ltd} where did = #{did}
+    </insert>
+    <!--根据订单编号查询订单信息-->
+    <select id="findDemandByDid" parameterType="String" resultType="Demand">
+        select * from demand where did = #{did}
+    </select>
+    <!--发布订单-->
+    <insert id="addDemand" parameterType="Demand" >
+        insert into demand(id,name,title,content,reward)
+        values(#{id},#{name},#{title},#{content},#{reward})
+    </insert>
+    <!--编辑订单-->
+    <update id="upDemand" parameterType="Demand">
+        update demand set title =#{title},content =#{content},reward =#{reward} where did = #{did}
+    </update>
+    <!--删除订单-->
+    <delete id="delDemand" parameterType="Integer">
+        delete from demand where did = #{did}
+    </delete>
+    <!--查询所有订单-->
+    <select id="findAllDemand" resultType="Demand">
+        select * from demand
+    </select>
+
+    <select id="SearchDemand" resultType="Demand" parameterType="String">
+        select * from demand where name like concat('%',#{content},'%') or title like concat('%',#{content},'%') or content like concat('%',#{content},'%');
+    </select>
+</mapper>

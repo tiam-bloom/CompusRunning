@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="section/head :: import">
+    <meta charset="UTF-8">
+    <title>我接收的</title>
+</head>
+<body>
+<div th:replace="section/head :: head"></div>
+<div class="container" id="container">
+    <div class="media" th:each="d:${DEMANDS}">
+        <div class="media-left media-top">
+            <img th:src="@{${d.userInfo.bigHead}}" onerror="this.src='https://static.runoob.com/images/mix/img_avatar.png'" class="media-object"
+                 style="width:80px">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"
+                data-toggle="modal"
+                data-target="#Modal_userinfo"
+                title="点击查看用户信息"
+                style="cursor:pointer"
+                th:onclick="'javascript:DisplayUser('+${d.id}+');'"
+                th:text="${d.name}+'：'"></h4>
+            <h4 align="center" th:text="${d.title}"></h4>
+            <p id="content"  th:text="'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+${d.content}"></p>
+        </div>
+        <div>
+            <span id="undertake" class="btn btn-default btn-lg pull-right" th:text=" '已 收 入 '+${d.reward}+' 元'"></span>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<!-- 模态框——用户信息查看（Modal） -->
+<div class="modal fade" id="Modal_userinfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModal_add">
+                    用户信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group">
+                    <li id="id" class="list-group-item active"></li>
+                    <li id="name" class="list-group-item"></li>
+                    <li id="email" class="list-group-item"></li>
+                    <li id="tel" class="list-group-item"></li>
+                    <li id="address" class="list-group-item"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+    function DisplayUser(id) {
+        $.ajax({
+            url: "/lookUser.action?id=" + id,
+            success: function (data) {
+                $("#id").text("用户唯一ID：" + data.id);
+                $("#name").text("昵称：" + data.name);
+                $("#email").text("邮箱：" + data.email);
+                $("#tel").text("电话：" + data.tel);
+                $("#address").text("地址：" + data.address);
+            }
+        })
+    }
+</script>
+</body>
+</html>

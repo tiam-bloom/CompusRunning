@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <!--图标库 可无视-->
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <!--核心样式-->
+    <link rel="stylesheet" th:href="@{/static/css/style.css}">
+    <script th:src="@{/static/js/jquery-3.6.0.js}"></script>
+    <script th:src="@{/static/js/script.js}" defer></script>
+</head>
+<body>
+<script>
+    $(document).ready(function () {
+        var c = 60;  //初始化 倒计时时间
+        /*邮箱按钮JS*/
+        function Timing() {
+            $("#getCode").text(c + "秒后重新获取");
+            //console.log(c);
+            // 1秒延时调用自己
+            myVar = setTimeout(function () {
+                Timing()
+            }, 1000);
+            c -= 1;
+            //设定条件跳出
+            if (c == -1) {
+                clearTimeout(myVar);  //停止
+                $("#getCode").removeAttr("disabled");  //移除禁用属性
+                $("#getCode").text("获取验证码");  //重新显示按钮
+                c = 60;  //重新初始化 倒计时时间
+            }
+        };
+
+        //点击按钮调用,添加属性禁用按钮
+        //调用 Timing()
+        $("#getCode").click(function () {
+            var emailInput = $("input[name='to']").val();
+            console.log(emailInput);
+            var emailRegExp = new RegExp("^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$");
+            if (emailInput == null || emailInput == ' ') {
+                alert("请先填写邮箱!");
+                return false;
+            } else if (!emailRegExp.test(emailInput)) {
+                alert("请检查你的邮箱格式!");
+                return false;
+            }
+            $("#getCode").attr("disabled", "disabled");
+            Timing();
+            $.ajax({
+                type: "POST",
+                url: "/getCode",
+                data: {
+                    to: emailInput,
+                },
+                success: function (data) {
+                    alert(data);
+                }
+            })
+            return true;
+        });
+
+        /*短信按钮JS*/
+        function SmsTiming() {
+            $("#getSmsCode").text(c + "秒后重新获取");
+            //console.log(c);
+            // 1秒延时调用自己
+            myVar = setTimeout(function () {
+                SmsTiming()
+            }, 1000);
+            c -= 1;
+            //设定条件跳出
+            if (c == -1) {
+                clearTimeout(myVar);  //停止
+                $("#getSmsCode").removeAttr("disabled");  //移除禁用属性
+                $("#getSmsCode").text("获取验证码");  //重新显示按钮
+                c = 60;  //重新初始化 倒计时时间
+            }
+        };
+
+        //点击按钮调用,添加属性禁用按钮
+        //调用 SmsTiming()
+        $("#getSmsCode").click(function () {
+            var SmsInput = $("input[name='tel']").val();
+
+            var smsRegExp = new RegExp("^((13[0-9])|(17[0-1,6-8])|(15[^4,\\\\D])|(18[0-9]))\\d{8}$");
+            if (SmsInput == null || SmsInput == ' ') {
+                alert("请先填写手机号!");
+                return false;
+            } else if (!smsRegExp.test(SmsInput)) {
+                alert("请检查你的手机格式!");
+                return false;
+            }
+            $("#getSmsCode").attr("disabled", "disabled");
+            SmsTiming();
+            $.ajax({
+                type: "POST",
+                url: "/getSmsCode",
+                data: {
+                    tel: SmsInput,
+                },
+                success: function (data) {
+                    alert(data);
+                }
+            })
+            return true;
+        });
+
+        $("h1[title='点击切换密码登录']").click(function () {
+            location.href = "/";
+        })
+    })
+</script>
+
+<div class="container">
+    <div class="card"></div>
+    <!-- 登录表单 -->
+    <div class="card">
+        <h1 class="title" style="cursor:pointer" title="点击切换密码登录">邮箱登录</h1>
+        <font color="red" th:text="${msg}"></font>
+        <font color="red" th:text="${tip}"></font>
+        <form action="/doLogin" method="post">
+            <div class="input-container">
+                <input type="text" name="to" required="required"/>
+                <label>邮箱</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" name="InputCode" class="input-val" style="width:228px" required="required"/>
+                <label>验证码</label>
+                <div class="bar"></div>
+            </div>
+            <div class="button-container">
+                <button type="button" id="getCode"><span>获取验证码</span></button>
+                <button type="submit" class="btn"><span>登录</span></button>
+            </div>
+        </form>
+    </div>
+
+    <!-- 短信登录 -->
+    <div class="card alt">
+        <div class="toggle" title="点击切换短信登录"></div>
+        <h1 class="title">短信登录
+            <div class="close"></div>
+        </h1>
+        <form action="/doRegister" method="post">
+            <div class="input-container">
+                <input type="text" id="tel" name="tel" required="required" maxlength="11"/>
+                <label for="tel">手机号</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" name="InputSmsCode" class="input-val" style="width:228px" required="required"/>
+                <label>验证码</label>
+                <div class="bar"></div>
+            </div>
+            <div class="button-container">
+                <button type="button" id="getSmsCode"><span>获取验证码</span></button>
+                <button type="submit"><span>登录</span></button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

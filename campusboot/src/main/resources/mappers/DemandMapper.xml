@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="icu.running.mapper.DemandMapper">
+    <!--查询倒序展示所有未被承接的订单 where state is null -->
+    <select id="findAll" resultType="Demand">
+        SELECT * FROM demand ORDER BY did DESC
+    </select>
+    <!--根据标题查询订单-->
+    <select id="findDemandByTitle" resultMap="BigHead" parameterType="String">
+        SELECT d.*,u.`bigHead` FROM demand d,`userinfo` u WHERE d.id = u.id AND title like concat('%',#{title},'%')
+    </select>
+    <!--根据发布人id查询订单-->
+    <select id="findDemandById"  resultMap="BigHead" parameterType="Integer">
+        SELECT d.*,u.`bigHead` FROM demand d,`userinfo` u WHERE d.id = u.id AND d.`id` = #{id};
+    </select>
+    <!--查询我承担的订单-->
+    <select id="findDemandByItd"  resultMap="BigHead" parameterType="Integer">
+        SELECT d.*,u.`bigHead` FROM demand d,`userinfo` u WHERE d.id = u.id AND d.`ltd`= #{ltd};
+    </select>
+    <!--更新订单发布人昵称-->
+    <update id="upName" parameterType="Demand">
+        UPDATE demand SET NAME = #{name} WHERE id = #{id}
+    </update>
+    <!--更新订单状态及承接人(接单)-->
+    <insert id="addStateAndLtd" parameterType="Demand">
+        UPDATE demand SET state = 1,ltd = #{ltd} where did = #{did}
+    </insert>
+    <!--根据订单编号查询订单信息-->
+    <select id="findDemandByDid" parameterType="String" resultType="Demand">
+        select * from demand where did = #{did}
+    </select>
+    <!--发布订单-->
+    <insert id="addDemand" parameterType="Demand" >
+        insert into demand(id,name,title,content,reward)
+        values(#{id},#{name},#{title},#{content},#{reward})
+    </insert>
+    <!--编辑订单-->
+    <update id="upDemand" parameterType="Demand">
+        update demand set title =#{title},content =#{content},reward =#{reward} where did = #{did}
+    </update>
+    <!--删除订单-->
+    <delete id="delDemand" parameterType="Integer">
+        delete from demand where did = #{did}
+    </delete>
+    <!--查询所有订单-->
+    <select id="findAllDemand" resultType="Demand">
+        select * from demand
+    </select>
+
+    <select id="SearchDemand" resultType="Demand" parameterType="String">
+        select * from demand where name like concat('%',#{content},'%') or title like concat('%',#{content},'%') or content like concat('%',#{content},'%');
+    </select>
+    <!--查询所有订单以及发布人的头像-->
+    <select id="findBigHeadAndDemand" resultMap="BigHead">
+        SELECT d.*,u.bigHead FROM demand d,`userinfo` u WHERE d.id = u.id ORDER BY did DESC
+    </select>
+    <resultMap id="BigHead" type="Demand">
+        <id property="did" column="did" />
+        <result property="id" column="id" />
+        <result property="name" column="name" />
+        <result property="title" column="title" />
+        <result property="content" column="content" />
+        <result property="reward" column="reward" />
+        <result property="state" column="state" />
+        <result property="ltd" column="ltd" />
+        <association property="userInfo" javaType="UserInfo">
+            <id property="id" column="id" />
+            <result property="name" column="name" />
+            <result property="bigHead" column="bigHead" />
+            <result property="email" column="email" />
+            <result property="tel" column="tel" />
+            <result property="address" column="address" />
+            <result property="balance" column="balance" />
+        </association>
+    </resultMap>
+</mapper>

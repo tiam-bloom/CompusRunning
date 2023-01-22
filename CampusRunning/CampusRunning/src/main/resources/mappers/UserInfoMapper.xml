@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="fit.yujing.mapper.UserInfoMapper">
+    <!--注册用户信息-->
+    <insert id="addUserInfo" parameterType="UserInfo">
+		insert into userinfo(id,name,email,tel,address)
+        values(#{id},#{name},#{email},#{tel},#{address})
+	</insert>
+    <!--查询用户信息-->
+    <select id="findById" resultType="UserInfo" parameterType="Integer">
+        select * from userinfo where id = #{id}
+    </select>
+    <!--充值账户-->
+    <update id="upBalance" parameterType="UserInfo">
+        UPDATE userinfo SET balance = balance+#{balance} WHERE id = #{id}
+    </update>
+    <!--更新资料-->
+    <update id="upUserInfo" parameterType="UserInfo">
+        UPDATE userinfo SET name = #{name},email = #{email},tel = #{tel},address = #{address} WHERE id = #{id}
+    </update>
+    <!--发布订单时账户余额减少-->
+    <update id="lowerBalance" parameterType="UserInfo">
+        UPDATE userinfo SET balance = balance-#{balance} WHERE id = #{id}
+    </update>
+    <!--管理员删除用户-->
+    <delete id="delUserInfo" parameterType="Integer">
+        delete from userinfo where id =#{id}
+    </delete>
+    <!--管理员更新修改账户余额 -->
+    <update id="updateBl" parameterType="UserInfo">
+        UPDATE userinfo SET balance = #{balance} WHERE id = #{id}
+    </update>
+</mapper>

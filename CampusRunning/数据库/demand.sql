@@ -1,0 +1,29 @@
+/*
+SQLyog Ultimate v12.08 (64 bit)
+MySQL - 5.5.12 
+*********************************************************************
+*/
+/*!40101 SET NAMES utf8 */;
+
+create table `demand` (
+	`did` int (11),
+	`id` int (11),
+	`name` varchar (60),
+	`title` varchar (60),
+	`content` varchar (6000),
+	`reward` int (11),
+	`state` int (11),
+	`ltd` int (11)
+); 
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('1','2','清分徐来','警告框','警告框（Alert）,警告框消息大多是用来向终端用户显示诸如警告或确认消息的信息。使用警告框（Alert）插件，您可以向所有的警告框消息添加可取消（dismiss）功能。','3','1','3');
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('2','2','清分徐来','弹出框','弹出框（Popover）与工具提示（Tooltip）类似，提供了一个扩展的视图。如需激活弹出框，用户只需把鼠标悬停在元素上即可。弹出框的内容完全可使用 Bootstrap 数据 API（Bootstrap Data API）来填充。该方法依赖于工具提示（tooltip）。','2',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('15','2','清分徐来','map对象','java.util 中的集合类包含 Java 中某些最常用的类。最常用的集合类是 List 和 Map。List 的具体实现包括  ArrayList 和 Vector，它们是可变大小的列表，比较适合构建、存储和操作任何类型对象元素列表。List  适用于按数值索引访问元素的情形。\r\n\r\nMap 提供了一个更通用的元素存储方法。Map  集合类用于存储元素对（称作“键”和“值”），其中每个键映射到一个','15',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('17','2','清分徐来','人类简史','这么说来，究竟为什么要学历史？历史不像是物理学或经济学，目的不在于做出准确预测。我们之所以研究历史，不是为了要知道未来，而是要拓展视野，要了解现在的种种绝非“自然”，也并非无可避免。未来的可能性远超过我们的想象。——《人类简史》','100',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('18','2','清分徐来','Spring MVC的工作原理','①客户端的所有请求都交给前端控制器DispatcherServlet来处理，它会负责调用系统的其他模块来真正处理用户的请求。\r\n② DispatcherServlet收到请求后，将根据请求的信息（包括URL、HTTP协议方法、请求头、请求参数、Cookie等）以及HandlerMapping的配置找到处理该请求的Handler（任何一个对象都可以作为请求的Handler）。\r\n③在这个地方Spring会通过HandlerAdapter对该处理器进行封装。\r\n④ HandlerAdapter是一个适配器，它用统一的接口对各种Handler中的方法进行调用。\r\n⑤ Handler完成对用户请求的处理后..','2',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('19','10','凌晨','SpringMVC的运行机制',' 1、用户发送请求时会先从DispathcherServler的doService方法开始，在该方法中会将ApplicationContext、localeResolver、themeResolver等对象添加到request中，紧接着就是调用doDispatch方法。\r\n\r\n2、进入该方法后首先会检查该请求是否是文件上传的请求(校验的规则是是否是post并且contenttType是否为multipart/为前缀)即调用的是checkMultipart方法；如果是的将request包装成MultipartHttpServletRequest。\r\n\r\n3、然后调用getHandler方法来匹配每个HandlerMapping对象，如果匹配成功会返回这个Handle的处理链HandlerExecutionChain对象，在获取该对象的内部其实也获取我们自定定义的拦截器，并执行了其中的方法。\r\n\r\n4、执行拦截器的preHandle方法，如果返回false执行afterCompletion方法并理解返回\r\n\r\n5、通过上述获取到了HandlerExecutionChain对象，通过该对象的getHandler()方法获得一个object通过HandlerAdapter进行封装得到HandlerAdapter对象。\r\n\r\n6、该对象调用handle方法来执行Controller中的方法，该对象如果返回一个ModelAndView给DispatcherServlet。\r\n\r\n7、DispatcherServlet借助ViewResolver完成逻辑试图名到真实视图对象的解析，得到View后DispatcherServlet使用这个View对ModelAndView中的模型数据进行视图渲染。 ','108',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('20','3','国庆快乐','focus 不生效','focus 不生效:\r\n\r\n　　在执行一段脚本时，对dom的操作应当是即时生效的。dom操作确实都是同步的。但是因dom改变而触发的事件，以及其他一些效应（例如样式应用），很可能是异步的。所以，focus这里可能是有延迟的。也有人说脚本对dom的操作不是即时生效的，浏览器可能执行完当前脚本所有代码后才真正处理脚本中对dom的操作。\r\n\r\n　　无论它是不是及时生效，但是，事实就是，focus必须延时一段时间才可以生效。\r\n\r\n　　所以处理这类问题的时候，要加上人工的延时函数，进行延时处理。\r\n\r\n延时函数为：settimeout（）\r\n\r\nsetTimeout(\"$(\'#test\').focus()\",500);','99',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('21','3','国庆快乐','Spring MVC注解的优点',' 1、XML配置起来有时候冗长，此时注解可能是更好的选择，如jpa的实体映射；注解在处理一些不变的元数据时有时候比XML方便的多，比如springmvc的数据绑定，如果用xml写的代码会多的多；\r\n\r\n2、注解最大的好处就是简化了XML配置；其实大部分注解一旦确定后很少会改变，所以在一些中小项目中使用注解反而提供了开发效率，所以没必要一头走到黑；\r\n\r\n3、注解相对于XML的另一个好处是类型安全的，XML只能在运行期才能发现问题。 ','10','1','10');
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('22','10','凌晨','负载均衡 反向代理模式','反向代理（Reverse Proxy）方式是指以代理服务器来接受internet上的连接请求，然后将请求转发给内部网络上的服务器，并将从服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个服务器。\r\n\r\n（2）反向代理负载均衡技术是把将来自internet上的连接请求以反向代理的方式动态地转发给内部网络上的多台服务器进行处理，从而达到负载均衡的目的。\r\n\r\n（3）反向代理负载均衡能以软件方式来实现，如apache mod_proxy、netscape proxy等，也可以在高速缓存器、负载均衡器等硬件设备上实现。反向代理负载均衡可以将优化的负载均衡策略和代理服务器的高速缓存技术结合在一起，提升静态网页的访问速度，提供有益的性能；由于网络外部用户不能直接访问真实的服务器，具备额外的安全性（同理，NAT负载均衡技术也有此优点）。\r\n\r\n（4）其缺点主要表现在以下两个方面\r\n\r\n反向代理是处于OSI参考模型第七层应用的，所以就必须为每一种应用服务专门开发一个反向代理服务器，这样就限制了反向代理负载均衡技术的应用范围，现在一般都用于对web服务器的负载均衡。\r\n\r\n针对每一次代理，代理服务器就必须打开两个连接，一个对外，一个对内，因此在并发连接请求数量非常大的时候，代理服务器的负载也就非常大了，在最后代理服务器本身会成为服务的瓶颈。\r\n\r\n一般来讲，可以用它来对连接数量不是特别大，但每次连接都需要消耗大量处理资源的站点进行负载均衡，如search等。 ','1234',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('23','11','两点半','HashMap的工作原理','HashMap类有一个叫做Entry的内部类。这个Entry类包含了key-value作为实例变量。 每当往hashmap里面存放key-value对的时候，都会为它们实例化一个Entry对象，这个Entry对象就会存储在前面提到的Entry数组table中。Entry具体存在table的那个位置是 根据key的hashcode()方法计算出来的hash值（来决定）。 ','1234',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('24','11','两点半','hashCode() 和equ','Java中的HashMap使用hashCode()和equals()方法来确定键值对的索引，当根据键获取值的时候也会用到这两个方法。如果没有正确的实现这两个方法，两个不同的键可能会有相同的hash值，因此，可能会被集合认为是相等的。而且，这两个方法也用来发现重复元素。所以这两个方法的实现对HashMap的精确性和正确性是至关重要的。','32',NULL,NULL);
+insert into `demand` (`did`, `id`, `name`, `title`, `content`, `reward`, `state`, `ltd`) values('25','11','两点半','什么是hashmap?',' HashMap 是一个散列表，它存储的内容是键值对(key-value)映射。\r\nHashMap 继承于AbstractMap，实现了Map、Cloneable、java.io.Serializable接口。\r\nHashMap 的实现不是同步的，这意味着它不是线程安全的。它的key、value都可以为null。此外，HashMap中的映射不是有序的。\r\n\r\nHashMap 的实例有两个参数影响其性能：“初始容量” 和 “加载因子”。容量 是哈希表中桶的数量，初始容量 只是哈希表在创建时的容量。加载因子 是哈希表在其容量自动增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行 rehash 操作（即重建内部数据结构），从而哈希表将具有大约两倍的桶数。\r\n通常，默认加载因子是 0.75, 这是在时间和空间成本上寻求一种折衷。加载因子过高虽然减少了空间开销，但同时也增加了查询成本（在大多数 HashMap 类的操作中，包括 get 和 put 操作，都反映了这一点）。在设置初始容量时应该考虑到映射中所需的条目数及其加载因子，以便最大限度地减少 rehash 操作次数。如果初始容量大于最大条目数除以加载因子，则不会发生 rehash 操作。 ','98',NULL,NULL);

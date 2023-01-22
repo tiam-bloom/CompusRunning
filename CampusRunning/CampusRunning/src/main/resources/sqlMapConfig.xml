@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>
+    <!-- 配置别名 -->
+    <typeAliases>
+        <!-- 批量扫描别名 -->
+        <package name="fit.yujing.pojo"/>
+    </typeAliases>
+
+    <mappers>
+        <!-- 扫描路径下的mapper映射文件 -->
+        <mapper resource="mappers/UserMapper.xml"/>
+		<mapper resource="mappers/UserInfoMapper.xml"/>
+		<mapper resource="mappers/DemandMapper.xml"/>
+    </mappers>
+
+</configuration>

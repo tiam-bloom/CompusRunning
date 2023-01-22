@@ -1,0 +1,83 @@
+#container {
+	margin-top: 100px;
+	padding: 0 200px;
+}
+
+#content {
+	line-height: 30px;
+	/* 行高 */
+}
+
+#undertake {
+	position: relative;
+	right: 50px;
+}
+
+.list-group-item {
+	line-height: 30px;
+}
+
+/* <!-- 发布表单样式 --> */
+
+.clears {
+	clear: both;
+}
+
+/*messages*/
+.messages {
+	padding: 15px 0;
+}
+
+.messages input,
+.messages select,
+.messages textarea {
+	margin: 0;
+	padding: 0;
+	background: none;
+	border: 0;
+	font-family: "Microsoft Yahei";
+}
+
+.messlist {
+	height: 30px;
+	margin-bottom: 10px;
+}
+
+.messlist label {
+	float: left;
+	width: 100px;
+	height: 30px;
+	font-size: 14px;
+	line-height: 30px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+.messlist input {
+	float: left;
+	width: 300px;
+	height: 28px;
+	padding-left: 5px;
+	border: #ccc 1px solid;
+}
+
+.messlist.textareas {
+	height: auto;
+}
+
+.messlist textarea {
+	float: left;
+	width: 700px;
+	height: 450px;
+	padding: 5px;
+	border: #ccc 1px solid;
+}
+
+.messlist.yzms input {
+	width: 100px;
+}
+
+.messlist.yzms .yzmimg {
+	float: left;
+	margin-left: 10px;
+}
